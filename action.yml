@@ -1,19 +1,9 @@
-name: 'Gofmter'
-author: 'Jérôme Pogeant'
-description: 'Check code formatting using gofmt'
-inputs:
-  gofmt-path:
-    description: 'Path used by gofmt command'
-    required: false
-    default: './'
-outputs:
-  gofmt-output:
-    description: 'The gofmt output if the command fail'
+name: golangci-lint
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.gofmt-path }}
-branding:
-  icon: 'check-circle'
-  color: 'green'
+  using: "composite"
+  steps:
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v3
+      with:
+        # Optional: version of golangci-lint to use in form of v1.2 or v1.2.3 or `latest` to use the latest version
+        version: v1.29
